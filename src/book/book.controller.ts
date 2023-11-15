@@ -45,6 +45,6 @@ export class BookController {
     id: string, 
   ): Promise<Book> {
     return this.bookService.deleteById(id);
-  }
-
+  } 
+  
 }
