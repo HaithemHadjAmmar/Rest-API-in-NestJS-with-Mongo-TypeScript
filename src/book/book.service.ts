@@ -21,4 +21,9 @@ export class BookService {
       return books;
     }
 
+    async findById (id: string): Promise<Book> {
+        const book = await this.bookModel.findById(id);
+        return book;
+    }
+
 }
