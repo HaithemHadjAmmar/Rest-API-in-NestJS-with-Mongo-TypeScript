@@ -16,35 +16,35 @@ export class BookController {
         return this.bookService.create(book);
     } 
 
-  @Get()
-   async getAllBooks(): Promise<Book[]> {
-    return this.bookService.findAll()
- }
+    @Get()
+    async getAllBooks(): Promise<Book[]> {
+        return this.bookService.findAll()
+    }
 
-  @Get()
-  async getBook(
-    @Param('id')
-    id: string
-  ): Promise<Book> {
-    return this.bookService.findById(id);
-  }
+    @Get()
+    async getBook(
+        @Param('id')
+        id: string
+    ): Promise<Book> {
+        return this.bookService.findById(id);
+    }
 
-  @Put()
-  async updateBook(
-    @Param('id')
-    id: string, 
-    @Body()
-    book: UpdateBookDto, 
-  ): Promise<Book>{
-    return this.bookService.updateById(id, book);
-  }
+    @Put()
+    async updateBook(
+        @Param('id')
+        id: string, 
+        @Body()
+        book: UpdateBookDto, 
+    ): Promise<Book>{
+        return this.bookService.updateById(id, book);
+    }
 
-  @Delete(':id')
-  async deleteBook(
-    @Param('id')
-    id: string, 
-  ): Promise<Book> {
-    return this.bookService.deleteById(id);
-  } 
-  
+    @Delete(':id')
+    async deleteBook(
+        @Param('id')
+        id: string, 
+    ): Promise<Book> {
+        return this.bookService.deleteById(id);
+    } 
+
 }
