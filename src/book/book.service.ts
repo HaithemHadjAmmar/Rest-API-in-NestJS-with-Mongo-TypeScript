@@ -29,8 +29,11 @@ export class BookService {
         }
      } : {}
 
-      const books = await this.bookModel.find({ ...keyword }).limit(resPerPage).skip(skip)
-      return books;
+    const books = await this.bookModel
+      .find({ ...keyword })
+      .limit(resPerPage)
+      .skip(skip);
+    return books;
     }
 
     async findById (id: string): Promise<Book> {
