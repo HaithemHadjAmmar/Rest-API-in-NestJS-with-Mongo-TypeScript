@@ -21,7 +21,7 @@ export class BookController {
         return this.bookService.findAll()
     }
 
-    @Get()
+    @Get(':id')
     async getBook(
         @Param('id')
         id: string
@@ -29,7 +29,7 @@ export class BookController {
         return this.bookService.findById(id);
     }
 
-    @Put()
+    @Put(':id')
     async updateBook(
         @Param('id')
         id: string, 
