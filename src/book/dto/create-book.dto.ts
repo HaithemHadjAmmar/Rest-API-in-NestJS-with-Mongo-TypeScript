@@ -1,6 +1,6 @@
 import { IsEnum, IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { Category } from "../schema/book.schema";
-import { ApiProperty } from "@nestjs/swagger"; // Import Swagger decorator
+import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateBookDto {
 
