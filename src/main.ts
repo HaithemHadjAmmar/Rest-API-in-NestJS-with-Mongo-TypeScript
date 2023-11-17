@@ -10,7 +10,7 @@ async function bootstrap() {
 
   // Swagger setup
   const config = new DocumentBuilder()
-    .setTitle('Bool API')
+    .setTitle('BooK API')
     .setDescription('Book API')
     .setVersion('1.0')
     .addTag("API")
