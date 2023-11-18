@@ -10,7 +10,7 @@ export class UpdateBookDto {
     @ApiProperty({ description: 'Title of the book', required: false })
     readonly title: string;
 
-    @IsOptional()
+    @IsOptional() 
     @IsString()
     @ApiProperty({ description: 'Description of the book', required: false })
     readonly description: string;

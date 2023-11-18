@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Get, Put, Param, Delete, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, Get, Put, Param, Delete, Query, UseGuards, Req } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiParam, ApiQuery } from '@nestjs/swagger';
 import { BookService } from './book.service';
 import { Book } from './schema/book.schema';
@@ -6,6 +6,7 @@ import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { Query as ExpressQuery } from 'express-serve-static-core';
 import { AuthGuard } from '@nestjs/passport';
+import { User } from 'src/auth/schema/user.schema';
 
 @ApiTags('Books')
 @Controller('books')
@@ -16,21 +17,22 @@ export class BookController {
     @UseGuards(AuthGuard())
     @ApiOperation({ summary: 'Create a book' })
     async createBook(
-        @Body() book: CreateBookDto
+        @Body() book: CreateBookDto,
+        @Req() req
     ): Promise<Book> {
-        return this.bookService.create(book);
+        return this.bookService.create(book, user.req);
     } 
 
     @Get()
-    @ApiOperation({ summary: 'Get all books' }) // Describe the operation
-    @ApiQuery({ name: 'yourQuery', required: false }) // Add query parameter documentation
+    @ApiOperation({ summary: 'Get all books' }) 
+    @ApiQuery({ name: 'yourQuery', required: false }) 
     async getAllBooks(@Query() query: ExpressQuery): Promise<Book[]> {
         return this.bookService.findAll(query)
     }
 
     @Get(':id')
-    @ApiOperation({ summary: 'Get a book by ID' }) // Describe the operation
-    @ApiParam({ name: 'id', type: 'string' }) // Add parameter documentation
+    @ApiOperation({ summary: 'Get a book by ID' }) 
+    @ApiParam({ name: 'id', type: 'string' }) 
     async getBook(
         @Param('id') id: string
     ): Promise<Book> {
@@ -38,8 +40,8 @@ export class BookController {
     }
 
     @Put(':id')
-    @ApiOperation({ summary: 'Update a book by ID' }) // Describe the operation
-    @ApiParam({ name: 'id', type: 'string' }) // Add parameter documentation
+    @ApiOperation({ summary: 'Update a book by ID' }) 
+    @ApiParam({ name: 'id', type: 'string' }) 
     async updateBook(
         @Param('id') id: string, 
         @Body() book: UpdateBookDto, 
