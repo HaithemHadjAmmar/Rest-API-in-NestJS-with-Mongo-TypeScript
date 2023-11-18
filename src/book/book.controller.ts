@@ -6,8 +6,6 @@ import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { Query as ExpressQuery } from 'express-serve-static-core';
 import { AuthGuard } from '@nestjs/passport';
-import { User } from 'src/auth/schema/user.schema';
-
 @ApiTags('Books')
 @Controller('books')
 export class BookController {
@@ -50,8 +48,8 @@ export class BookController {
     }
 
     @Delete(':id')
-    @ApiOperation({ summary: 'Delete a book by ID' }) // Describe the operation
-    @ApiParam({ name: 'id', type: 'string' }) // Add parameter documentation
+    @ApiOperation({ summary: 'Delete a book by ID' }) 
+    @ApiParam({ name: 'id', type: 'string' }) 
     async deleteBook(
         @Param('id') id: string, 
     ): Promise<Book> {
