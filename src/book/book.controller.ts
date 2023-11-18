@@ -1,10 +1,11 @@
-import { Body, Controller, Post, Get, Put, Param, Delete, Query } from '@nestjs/common';
+import { Body, Controller, Post, Get, Put, Param, Delete, Query, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiParam, ApiQuery } from '@nestjs/swagger';
 import { BookService } from './book.service';
 import { Book } from './schema/book.schema';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { Query as ExpressQuery } from 'express-serve-static-core';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('Books')
 @Controller('books')
@@ -12,7 +13,8 @@ export class BookController {
     constructor(private bookService: BookService) {}
 
     @Post()
-    @ApiOperation({ summary: 'Create a book' }) // Describe the operation
+    @UseGuards(AuthGuard())
+    @ApiOperation({ summary: 'Create a book' })
     async createBook(
         @Body() book: CreateBookDto
     ): Promise<Book> {
