@@ -20,7 +20,7 @@ export class BookController {
         @Body() book: CreateBookDto,
         @Req() req
     ): Promise<Book> {
-        return this.bookService.create(book, user.req);
+        return this.bookService.create(book, req.user);
     } 
 
     @Get()
