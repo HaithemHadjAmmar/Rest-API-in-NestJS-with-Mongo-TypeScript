@@ -27,28 +27,29 @@ export class AuthService {
             password: hashedPassword
         })
 
-        const token = this.jwtService.sign({ id: user._id})
+        // Store additional user data in the token payload
+        const token = this.jwtService.sign({ userId: user._id, name: user.name, email: user.email })
 
         return { token }
     }
 
-    async login(loginDto: LoginDto): Promise<{ token: string}> {
+    async login(loginDto: LoginDto): Promise<{ token: string }> {
         const { email, password } = loginDto;
 
         const user = await this.userModel.findOne({ email })
 
-        if(!user) {
-            throw new UnauthorizedException('invalid email or password')
+        if (!user) {
+            throw new UnauthorizedException('Invalid email or password')
         }
 
         const isPasswordMatched = await bcrypt.compare(password, user.password)
     
-        if(!isPasswordMatched) {
-            throw new UnauthorizedException('invalid email or password')
+        if (!isPasswordMatched) {
+            throw new UnauthorizedException('Invalid email or password')
         }
 
-        const token = this.jwtService.sign({ sign: user._id });
+        // Store additional user data in the token payload
+        const token = this.jwtService.sign({ userId: user._id, name: user.name, email: user.email });
         return { token }
-
     }
 }
