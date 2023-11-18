@@ -21,7 +21,7 @@ export class BookController {
         @Req() req
     ): Promise<Book> {
         return this.bookService.create(book, req.user);
-    } 
+    }
 
     @Get()
     @ApiOperation({ summary: 'Get all books' }) 
