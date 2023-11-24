@@ -1,4 +1,4 @@
-import { IsEmail, IsEmpty, IsEnum, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsEmpty, IsEnum, IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { Category } from "../schema/book.schema";
 import { ApiProperty } from "@nestjs/swagger";
 import { User } from "../../auth/schema/user.schema";
